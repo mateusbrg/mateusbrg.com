@@ -1,0 +1,93 @@
+---
+title: "Arquitetura de Sistemas: Princípios que Guiam Boas Decisões"
+description: "Explorando os princípios fundamentais de arquitetura de software que ajudam a construir sistemas resilientes e escaláveis."
+date: 2026-02-01
+image: ./images/segundo-post-cover.svg
+tags: ["arquitetura", "sistemas", "backend"]
+draft: false
+---
+
+## Separação de responsabilidades: a base de tudo
+
+Se existe um princípio que atravessa décadas de engenharia de software sem perder relevância, é a **separação de responsabilidades** (_Separation of Concerns_). A ideia é direta: cada módulo, classe ou função deve ter uma única razão para existir e uma única razão para mudar.
+
+Na prática, isso significa que o código que lida com regras de negócio não deveria se preocupar com detalhes de infraestrutura. Um serviço que calcula o preço de um pedido não precisa saber se os dados vêm de um banco PostgreSQL ou de uma API externa. Quando respeitamos essa fronteira, ganhamos flexibilidade para evoluir cada parte do sistema de forma independente.
+
+> "A arquitetura é sobre as decisões importantes — e as decisões importantes são aquelas que são difíceis de reverter." — Martin Fowler
+
+Essa citação resume bem o papel do arquiteto: não é sobre escolher a tecnologia mais nova, mas sobre tomar decisões que preservem a capacidade de mudança ao longo do tempo.
+
+## SOLID na prática com TypeScript
+
+Os princípios SOLID continuam sendo um guia valioso, especialmente quando trabalhamos com TypeScript em projetos de médio e grande porte. Vamos olhar para o **Princípio da Inversão de Dependência** (_Dependency Inversion Principle_), que é talvez o mais impactante para a arquitetura geral do sistema.
+
+A ideia central é que módulos de alto nível não devem depender de módulos de baixo nível — ambos devem depender de abstrações. Em TypeScript, isso se traduz naturalmente no uso de interfaces:
+
+```typescript
+// Abstração que define o contrato
+interface OrderRepository {
+  findById(id: string): Promise<Order | null>;
+  save(order: Order): Promise<void>;
+  findByCustomer(customerId: string): Promise<Order[]>;
+}
+
+// Implementação concreta — pode ser trocada sem afetar o domínio
+class PostgresOrderRepository implements OrderRepository {
+  constructor(private readonly db: DatabaseConnection) {}
+
+  async findById(id: string): Promise<Order | null> {
+    const row = await this.db.query("SELECT * FROM orders WHERE id = $1", [id]);
+    return row ? this.toDomain(row) : null;
+  }
+
+  async save(order: Order): Promise<void> {
+    await this.db.query(
+      "INSERT INTO orders (id, customer_id, total) VALUES ($1, $2, $3)",
+      [order.id, order.customerId, order.total]
+    );
+  }
+
+  async findByCustomer(customerId: string): Promise<Order[]> {
+    const rows = await this.db.query(
+      "SELECT * FROM orders WHERE customer_id = $1",
+      [customerId]
+    );
+    return rows.map(this.toDomain);
+  }
+
+  private toDomain(row: Record<string, unknown>): Order {
+    return new Order(row.id as string, row.customer_id as string, row.total as number);
+  }
+}
+
+// O serviço depende apenas da abstração
+class OrderService {
+  constructor(private readonly repository: OrderRepository) {}
+
+  async getOrderSummary(customerId: string): Promise<OrderSummary> {
+    const orders = await this.repository.findByCustomer(customerId);
+    const total = orders.reduce((sum, order) => sum + order.total, 0);
+    return { customerId, orderCount: orders.length, totalSpent: total };
+  }
+}
+```
+
+Com essa estrutura, podemos facilmente substituir `PostgresOrderRepository` por uma implementação em memória durante os testes, ou migrar para outro banco de dados sem tocar na lógica de negócio.
+
+## Trade-offs: o coração da arquitetura
+
+Uma verdade desconfortável sobre arquitetura de software é que **não existem soluções perfeitas, apenas trade-offs**. Cada decisão envolve trocar um benefício por um custo, e o papel do arquiteto é tornar esses trade-offs explícitos.
+
+Alguns exemplos clássicos:
+
+- **Monolito vs. Microsserviços**: o monolito é mais simples de desenvolver, deployar e debugar, mas pode se tornar difícil de escalar em equipes grandes. Microsserviços oferecem independência entre times, mas introduzem complexidade operacional significativa.
+- **Consistência vs. Disponibilidade**: o teorema CAP nos lembra que, em sistemas distribuídos, precisamos escolher entre consistência forte e disponibilidade total durante partições de rede.
+- **Abstração vs. Simplicidade**: mais camadas de abstração facilitam a troca de componentes, mas adicionam indireção que pode dificultar o entendimento do código.
+
+A chave é avaliar o contexto do projeto. Um sistema que atende a milhões de usuários tem necessidades muito diferentes de uma ferramenta interna usada por dez pessoas. Aplicar padrões de microsserviços em um projeto pequeno é tão prejudicial quanto ignorar princípios de escalabilidade em um sistema de alta demanda.
+
+## Conclusão: princípios, não regras
+
+Princípios de arquitetura são guias, não mandamentos. O mais importante é entender o _porquê_ por trás de cada princípio para saber quando aplicá-lo — e quando abrir exceções. Sistemas bem arquitetados não são aqueles que seguem todas as boas práticas à risca, mas aqueles que tomam decisões conscientes e documentadas, priorizando a capacidade de evolução ao longo do tempo.
+
+No fim, a melhor arquitetura é aquela que permite que a equipe entregue valor de forma sustentável, sem que o sistema se torne um obstáculo ao crescimento do produto.

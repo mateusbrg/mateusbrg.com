@@ -1,6 +1,18 @@
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/noto-serif/400.css";
+@import "@fontsource/noto-serif/400-italic.css";
+@import "@fontsource/noto-serif/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/700.css";
+
 @import "tailwindcss";
 
 @theme {
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Noto Serif", serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
   --color-background: #FAFAF8;
   --color-surface: #FFFFFF;
   --color-text-primary: #1A1A1A;

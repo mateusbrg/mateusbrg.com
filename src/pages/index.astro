@@ -1,11 +1,46 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
 ---
 
 <Layout title="Mateus Braga">
-	<Welcome />
+  <!-- Hero section -->
+  <section class="py-16 sm:py-24">
+    <h1 class="font-heading text-4xl sm:text-5xl font-bold text-text-primary">
+      Olá, eu sou o Mateus.
+    </h1>
+    <p class="text-lg text-text-muted mt-4 max-w-2xl">
+      Engenheiro de software apaixonado por sistemas, computação e tecnologia. Este é meu cantinho na internet.
+    </p>
+  </section>
+
+  <!-- Latest posts section -->
+  <section class="mt-16">
+    <div class="flex items-center justify-between">
+      <h2 class="font-heading text-2xl font-bold">Últimos Pensamentos</h2>
+      <a href="/blog" class="text-accent hover:underline text-sm">Ver Arquivo →</a>
+    </div>
+
+    <div class="mt-8">
+      {posts.map((post) => (
+        <div class="py-4 border-b border-border last:border-b-0">
+          <div class="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-x-8 gap-y-1">
+            <time class="font-mono text-sm text-text-muted">
+              {post.data.date.toLocaleDateString('pt-BR', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </time>
+            <div>
+              <a href={`/blog/${post.id}`} class="font-heading font-semibold text-lg text-text-primary hover:text-accent">
+                {post.data.title}
+              </a>
+              <p class="text-text-muted text-sm mt-1">{post.data.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
 </Layout>

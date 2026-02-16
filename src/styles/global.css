@@ -21,3 +21,31 @@
   --color-border: #E8E8E4;
   --color-accent: #2B5EA7;
 }
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    color: var(--color-text-body);
+    background-color: var(--color-background);
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--color-text-primary);
+    line-height: 1.2;
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  image: ImageMetadata;
+  slug: string;
+}
+
+const { title, description, date, image, slug } = Astro.props;
+---
+
+<div class="py-6 border-b border-border last:border-b-0">
+  <div class="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-4 md:gap-8 items-start">
+    <a href={`/blog/${slug}`}>
+      <Image
+        src={image}
+        alt={title}
+        width={400}
+        height={250}
+        class="rounded-lg object-cover w-full h-full"
+        loading="lazy"
+      />
+    </a>
+    <div>
+      <time class="font-mono text-sm text-text-muted">
+        {date.toLocaleDateString('pt-BR', { year: 'numeric', month: 'short', day: 'numeric' })}
+      </time>
+      <a href={`/blog/${slug}`} class="font-heading font-semibold text-xl text-text-primary hover:text-accent block mt-1">
+        {title}
+      </a>
+      <p class="text-text-muted text-sm mt-2">{description}</p>
+    </div>
+  </div>
+</div>

@@ -2,16 +2,17 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Sobre" description="Sobre Mateus Braga — engenheiro de software">
-  <div class="max-w-[720px] mx-auto py-12">
-    <h1 class="font-heading text-4xl font-bold text-text-primary">Sobre Mim</h1>
+<Layout title="Sobre" description="Sobre Mateus Braga — engenheiro de software" containerSize="content">
+  <section class="section-shell pt-10 sm:pt-14">
+    <p class="eyebrow">Sobre</p>
+    <h1 class="font-heading text-[var(--size-h1)] font-bold text-text-primary mt-2">Sobre mim</h1>
 
     <div class="prose mt-8">
       <p>
         Olá! Eu sou o Mateus, engenheiro de software apaixonado por sistemas, computação e tecnologia.
       </p>
       <p>
-        Este blog é meu cantinho pessoal na internet — um espaço para compartilhar pensamentos,
+        Este blog é meu cantinho pessoal na internet: um espaço para compartilhar pensamentos,
         aprendizados e visões sobre o mundo da tecnologia. Aqui você encontra reflexões sobre
         arquitetura de sistemas, desenvolvimento de software e as ferramentas que uso no dia a dia.
       </p>
@@ -36,5 +37,5 @@ import Layout from '../layouts/Layout.astro';
         <li><a href="https://linkedin.com/in/mateusbrg" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
       </ul>
     </div>
-  </div>
+  </section>
 </Layout>

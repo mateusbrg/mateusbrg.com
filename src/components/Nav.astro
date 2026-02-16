@@ -2,29 +2,38 @@
 const pathname = Astro.url.pathname;
 
 const links = [
-  { label: 'Home', href: '/', isActive: pathname === '/' },
+  { label: 'Início', href: '/', isActive: pathname === '/' },
   { label: 'Blog', href: '/blog', isActive: pathname.startsWith('/blog') },
   { label: 'Sobre', href: '/sobre', isActive: pathname.startsWith('/sobre') },
 ];
 ---
 
-<nav class="sticky top-0 z-50 bg-surface border-b border-border">
-  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-    <a href="/" class="font-heading font-bold text-foreground">mateus</a>
-    <div class="flex items-center gap-6">
+<nav class="sticky top-0 z-50 py-3 sm:py-4">
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-7 lg:px-10">
+    <div class="surface-card mx-auto max-w-max px-2.5 py-2 sm:px-4 sm:py-2.5">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a
+          href="/"
+          class="font-heading text-sm sm:text-[0.95rem] font-bold text-text-primary px-2 py-1.5"
+          aria-label="Mateus Braga - página inicial"
+        >
+          mateus
+        </a>
       {links.map((link) => (
         <a
           href={link.href}
           class:list={[
-            'transition-colors',
+            'rounded-full px-2.5 py-1.5 text-[0.9rem] sm:text-[0.95rem] transition-colors duration-[var(--motion-fast)] no-underline',
             link.isActive
-              ? 'text-primary font-semibold'
-              : 'text-muted hover:text-primary',
+              ? 'bg-accent-soft text-accent font-semibold'
+              : 'text-text-muted hover:text-text-primary',
           ]}
+          aria-current={link.isActive ? 'page' : undefined}
         >
           {link.label}
         </a>
       ))}
+      </div>
     </div>
   </div>
 </nav>

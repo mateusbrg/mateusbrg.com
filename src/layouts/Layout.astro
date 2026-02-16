@@ -9,9 +9,22 @@ interface Props {
   description?: string;
   image?: string;
   type?: string;
+  mainClass?: string;
+  containerSize?: 'content' | 'wide';
 }
 
-const { title, description, image, type } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  type,
+  mainClass = '',
+  containerSize = 'wide',
+} = Astro.props;
+
+const containerClass = containerSize === 'content'
+  ? 'max-w-[760px]'
+  : 'max-w-[1200px]';
 ---
 
 <!doctype html>
@@ -24,7 +37,11 @@ const { title, description, image, type } = Astro.props;
   </head>
   <body>
     <Nav />
-    <main class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+    <main class:list={[
+      containerClass,
+      'mx-auto px-5 sm:px-7 lg:px-10',
+      mainClass,
+    ]}>
       <slot />
     </main>
     <Footer />

@@ -7,31 +7,54 @@ interface Props {
   date: Date;
   image: ImageMetadata;
   slug: string;
+  variant?: 'row' | 'compact';
 }
 
-const { title, description, date, image, slug } = Astro.props;
+const { title, description, date, image, slug, variant = 'row' } = Astro.props;
 ---
 
-<div class="py-6 border-b border-border last:border-b-0">
-  <div class="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-4 md:gap-8 items-start">
-    <a href={`/blog/${slug}`}>
+<article class="py-5 sm:py-6 border-b border-border last:border-b-0">
+  <div class:list={[
+    'grid gap-4 sm:gap-7 items-center',
+    variant === 'row'
+      ? 'grid-cols-1 md:grid-cols-[1.6fr_2fr]'
+      : 'grid-cols-[78px_1fr] sm:grid-cols-[96px_1fr]',
+  ]}>
+    <a href={`/blog/${slug}`} class="group overflow-hidden rounded-xl border border-border bg-surface">
       <Image
         src={image}
         alt={title}
-        width={400}
-        height={250}
-        class="rounded-lg object-cover w-full h-full"
+        width={variant === 'row' ? 720 : 220}
+        height={variant === 'row' ? 430 : 220}
+        class:list={[
+          'object-cover w-full h-full transition-transform duration-[var(--motion-base)]',
+          variant === 'row' ? 'aspect-[16/10]' : 'aspect-square',
+          'group-hover:scale-[1.02]',
+        ]}
         loading="lazy"
       />
     </a>
     <div>
-      <time class="font-mono text-sm text-text-muted">
+      <time class="meta-line">
         {date.toLocaleDateString('pt-BR', { year: 'numeric', month: 'short', day: 'numeric' })}
       </time>
-      <a href={`/blog/${slug}`} class="font-heading font-semibold text-xl text-text-primary hover:text-accent block mt-1">
+      <a
+        href={`/blog/${slug}`}
+        class:list={[
+          'font-heading font-semibold text-text-primary hover:text-accent block mt-1.5 no-underline leading-tight',
+          variant === 'row' ? 'text-[1.2rem] sm:text-[1.5rem]' : 'text-[1.05rem] sm:text-[1.15rem]',
+        ]}
+      >
         {title}
       </a>
-      <p class="text-text-muted text-sm mt-2">{description}</p>
+      <p
+        class:list={[
+          'text-text-muted mt-2 content-measure',
+          variant === 'row' ? 'text-[0.95rem] sm:text-base' : 'text-[0.88rem] sm:text-[0.95rem]',
+        ]}
+      >
+        {description}
+      </p>
     </div>
   </div>
-</div>
+</article>

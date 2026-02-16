@@ -1,0 +1,30 @@
+---
+const pathname = Astro.url.pathname;
+
+const links = [
+  { label: 'Home', href: '/', isActive: pathname === '/' },
+  { label: 'Blog', href: '/blog', isActive: pathname.startsWith('/blog') },
+  { label: 'Sobre', href: '/sobre', isActive: pathname.startsWith('/sobre') },
+];
+---
+
+<nav class="sticky top-0 z-50 bg-surface border-b border-border">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+    <a href="/" class="font-heading font-bold text-foreground">mateus</a>
+    <div class="flex items-center gap-6">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'transition-colors',
+            link.isActive
+              ? 'text-primary font-semibold'
+              : 'text-muted hover:text-primary',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>

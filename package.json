@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
+    "@astrojs/sitemap": "^3.7.0",
     "@astrojs/vue": "^5.1.4",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/noto-serif": "^5.2.9",

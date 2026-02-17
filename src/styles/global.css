@@ -33,10 +33,10 @@
   --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-emphasis: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  --size-display: clamp(2.1rem, 5.6vw, 3.9rem);
-  --size-h1: clamp(1.86rem, 4.3vw, 3.02rem);
-  --size-h2: clamp(1.38rem, 2.6vw, 2.08rem);
-  --size-lead: clamp(1.07rem, 1.6vw, 1.28rem);
+  --size-display: clamp(2.35rem, 6vw, 4.4rem);
+  --size-h1: clamp(2.05rem, 4.8vw, 3.35rem);
+  --size-h2: clamp(1.5rem, 3vw, 2.2rem);
+  --size-lead: clamp(1.1rem, 1.7vw, 1.32rem);
   --size-body: clamp(1rem, 0.97rem + 0.15vw, 1.08rem);
   --size-meta: 0.9rem;
   --space-section: clamp(2.75rem, 7vw, 5.5rem);
@@ -114,6 +114,35 @@
 
   .content-measure {
     max-width: var(--measure-content);
+  }
+
+  .page-display {
+    font-family: var(--font-heading);
+    font-size: var(--size-display);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .page-title {
+    font-family: var(--font-heading);
+    font-size: var(--size-h1);
+    font-weight: 700;
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: var(--size-h2);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
+
+  .page-lead {
+    font-size: var(--size-lead);
+    line-height: 1.6;
   }
 
   .eyebrow {

@@ -11,10 +11,10 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 <Layout title="Mateus Braga" description="Meu cantinho digital para compartilhar reflexões sobre sistemas, computação e tecnologia.">
   <section class="section-shell pt-8 sm:pt-12" transition:name="home-hero">
     <p class="eyebrow reveal">Meu espaço na internet</p>
-    <h1 class="font-heading text-[var(--size-display)] font-bold text-text-primary mt-3 content-measure reveal reveal-delay-1" transition:name="page-title">
+    <h1 class="page-display text-text-primary mt-3 content-measure reveal reveal-delay-1" transition:name="page-title">
       Escrevo sobre sistemas, engenharia de software e as ideias que valem ser revisitadas.
     </h1>
-    <p class="text-[var(--size-lead)] text-text-muted mt-5 content-measure reveal reveal-delay-2">
+    <p class="page-lead text-text-muted mt-5 content-measure reveal reveal-delay-2">
       Um arquivo pessoal em pt-BR para pensar com calma, documentar aprendizados e compartilhar visões práticas de tecnologia.
     </p>
     <div class="mt-8 flex flex-wrap items-center gap-4 reveal reveal-delay-2">
@@ -32,7 +32,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     <div class="section-intro reveal">
       <p class="eyebrow">Últimos textos</p>
       <div class="flex flex-wrap items-end justify-between gap-4 mt-2">
-        <h2 class="font-heading text-[var(--size-h1)] font-bold text-text-primary">Últimos artigos</h2>
+        <h2 class="section-title text-text-primary">Últimos artigos</h2>
         <a href="/blog" class="meta-line no-underline hover:text-accent">Ver todos os textos</a>
       </div>
     </div>

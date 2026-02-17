@@ -8,24 +8,41 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .slice(0, 5);
 ---
 
-<Layout title="Mateus Braga" description="Meu cantinho digital para compartilhar reflexões sobre sistemas, computação e tecnologia.">
+<Layout
+  title="Mateus Braga"
+  description="Meu cantinho digital para compartilhar reflexões sobre sistemas, computação e tecnologia."
+>
   <section class="section-shell pt-8 sm:pt-12" transition:name="home-hero">
-    <p class="eyebrow reveal">Meu espaço na internet</p>
-    <h1 class="page-display text-text-primary mt-3 content-measure reveal reveal-delay-1" transition:name="page-title">
-      Escrevo sobre sistemas, engenharia de software e as ideias que valem ser revisitadas.
+    <p class="eyebrow reveal">Olá, sou o Mateus!</p>
+    <h1
+      class="page-display text-text-primary mt-3 content-measure reveal reveal-delay-1"
+      transition:name="page-title"
+    >
+      Tudo placeholder por enquanto, aguarde!
     </h1>
-    <p class="page-lead text-text-muted mt-5 content-measure reveal reveal-delay-2">
-      Um arquivo pessoal em pt-BR para pensar com calma, documentar aprendizados e compartilhar visões práticas de tecnologia.
+    <p
+      class="page-lead text-text-muted mt-5 content-measure reveal reveal-delay-2"
+    >
+      placeholder para o conteúdo da home, que ainda está em construção.
     </p>
     <div class="mt-8 flex flex-wrap items-center gap-4 reveal reveal-delay-2">
-      <a href="/blog" class="inline-flex items-center justify-center rounded-full bg-text-primary px-5 py-2.5 font-heading text-sm font-semibold text-white no-underline transition-[background-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:bg-accent hover:-translate-y-px motion-reduce:transition-none">
+      <a
+        href="/blog"
+        class="inline-flex items-center justify-center rounded-full bg-text-primary px-5 py-2.5 font-heading text-sm font-semibold text-white no-underline transition-[background-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:bg-accent hover:-translate-y-px motion-reduce:transition-none"
+      >
         Ler artigos
       </a>
-      <a href="/sobre" class="inline-flex items-center justify-center rounded-full border border-border-strong bg-surface px-5 py-2.5 font-heading text-sm font-semibold text-text-primary no-underline transition-[color,border-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:border-accent hover:text-accent hover:-translate-y-px motion-reduce:transition-none">
+      <a
+        href="/sobre"
+        class="inline-flex items-center justify-center rounded-full border border-border-strong bg-surface px-5 py-2.5 font-heading text-sm font-semibold text-text-primary no-underline transition-[color,border-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:border-accent hover:text-accent hover:-translate-y-px motion-reduce:transition-none"
+      >
         Sobre mim
       </a>
     </div>
-    <div class="mt-10 h-px w-full bg-gradient-to-r from-transparent via-border to-transparent"></div>
+    <div
+      class="mt-10 h-px w-full bg-gradient-to-r from-transparent via-border to-transparent"
+    >
+    </div>
   </section>
 
   <section class="section-shell pt-1" transition:name="home-latest">
@@ -33,20 +50,24 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <p class="eyebrow">Últimos textos</p>
       <div class="flex flex-wrap items-end justify-between gap-4 mt-2">
         <h2 class="section-title text-text-primary">Últimos artigos</h2>
-        <a href="/blog" class="meta-line no-underline hover:text-accent">Ver todos os textos</a>
+        <a href="/blog" class="meta-line no-underline hover:text-accent"
+          >Ver todos os textos</a
+        >
       </div>
     </div>
     <div>
-      {posts.map((post) => (
-        <BlogCard
-          title={post.data.title}
-          description={post.data.description}
-          date={post.data.date}
-          image={post.data.image}
-          slug={post.id}
-          variant="compact"
-        />
-      ))}
+      {
+        posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            image={post.data.image}
+            slug={post.id}
+            variant="compact"
+          />
+        ))
+      }
     </div>
   </section>
 </Layout>

@@ -1,29 +1,29 @@
-@import "@fontsource/space-grotesk/400.css";
-@import "@fontsource/space-grotesk/700.css";
-@import "@fontsource/noto-serif/400.css";
-@import "@fontsource/noto-serif/400-italic.css";
-@import "@fontsource/noto-serif/700.css";
-@import "@fontsource/ibm-plex-mono/400.css";
-@import "@fontsource/ibm-plex-mono/700.css";
+@import '@fontsource/space-grotesk/400.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/noto-serif/400.css';
+@import '@fontsource/noto-serif/400-italic.css';
+@import '@fontsource/noto-serif/700.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/700.css';
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --font-heading: "Space Grotesk", sans-serif;
-  --font-body: "Noto Serif", serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Noto Serif', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
 
-  --color-background: #FAFAF8;
-  --color-surface: #FFFFFF;
+  --color-background: #fafaf8;
+  --color-surface: #ffffff;
   --color-surface-soft: #f4f4f1;
   --color-surface-elevated: #fffefb;
-  --color-text-primary: #1A1A1A;
-  --color-text-body: #3D3D3D;
-  --color-text-muted: #6B6B6B;
+  --color-text-primary: #1a1a1a;
+  --color-text-body: #3d3d3d;
+  --color-text-muted: #6b6b6b;
   --color-text-faint: #8a8a83;
-  --color-border: #E8E8E4;
+  --color-border: #e8e8e4;
   --color-border-strong: #d8d8d1;
-  --color-accent: #2B5EA7;
+  --color-accent: #2b5ea7;
   --color-accent-soft: #d7e4f6;
 
   --shadow-soft: 0 8px 28px -20px rgba(20, 20, 20, 0.35);
@@ -53,14 +53,18 @@
     font-size: 16.5px;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-heading);
     color: var(--color-text-primary);
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
 
-  code, pre {
+  code,
+  pre {
     font-family: var(--font-mono);
   }
 
@@ -211,7 +215,8 @@
     color: var(--color-text-muted);
     font-style: italic;
   }
-  .prose ul, .prose ol {
+  .prose ul,
+  .prose ol {
     padding-left: 1.5rem;
     margin-bottom: 1.4rem;
   }

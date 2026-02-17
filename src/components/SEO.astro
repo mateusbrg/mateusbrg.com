@@ -18,5 +18,5 @@ const { title, description, image, type } = Astro.props;
 <meta property="og:title" content={title} />
 {description && <meta property="og:description" content={description} />}
 <meta property="og:url" content={Astro.url.href} />
-<meta property="og:type" content={type || "website"} />
+<meta property="og:type" content={type || 'website'} />
 {image && <meta property="og:image" content={image} />}

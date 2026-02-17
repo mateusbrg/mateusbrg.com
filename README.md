@@ -1,4 +1,3 @@
 # mateusbrg-blog
-Meu blog pessoal que usarei como acervo de conhecimento sobre tecnologias, ferramentas e soluções para ajudar o dia-a-dia de outras pessoas 
 
-## Em desenvolvimento
+Meu futuro espaço pessoal nessa imensidão da internet, para compartilhar ideias, conhecimento técnico e, principalmente, levantar mais perguntas. Aproveite a viagem

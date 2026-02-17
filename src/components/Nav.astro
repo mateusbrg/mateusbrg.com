@@ -4,7 +4,7 @@ const pathname = Astro.url.pathname;
 const links = [
   { label: 'Início', href: '/', isActive: pathname === '/' },
   { label: 'Blog', href: '/blog', isActive: pathname.startsWith('/blog') },
-  { label: 'Sobre', href: '/sobre', isActive: pathname.startsWith('/sobre') },
+  { label: 'Sobre', href: '/about', isActive: pathname.startsWith('/about') },
 ];
 ---
 
@@ -12,20 +12,22 @@ const links = [
   <div class="max-w-[56rem] mx-auto px-5 sm:px-7 lg:px-10">
     <div class="surface-card mx-auto max-w-max px-2.5 py-2 sm:px-3 sm:py-2.5">
       <div class="flex items-center gap-1.5 sm:gap-2">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class:list={[
-              'rounded-full px-3 py-1.5 text-[0.93rem] sm:text-[0.98rem] transition-[color,background-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] no-underline motion-reduce:transition-none',
-              link.isActive
-                ? 'bg-accent-soft text-accent font-semibold'
-                : 'text-text-muted hover:text-text-primary hover:-translate-y-px',
-            ]}
-            aria-current={link.isActive ? 'page' : undefined}
-          >
-            {link.label}
-          </a>
-        ))}
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'rounded-full px-3 py-1.5 text-[0.93rem] sm:text-[0.98rem] transition-[color,background-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] no-underline motion-reduce:transition-none',
+                link.isActive
+                  ? 'bg-accent-soft text-accent font-semibold'
+                  : 'text-text-muted hover:text-text-primary hover:-translate-y-px',
+              ]}
+              aria-current={link.isActive ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>

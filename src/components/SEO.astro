@@ -9,7 +9,7 @@ interface Props {
 const { title, description, image, type } = Astro.props;
 ---
 
-<title>{title} | mateusbrg.com</title>
+<title>{title}</title>
 {description && <meta name="description" content={description} />}
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href={Astro.url.href} />

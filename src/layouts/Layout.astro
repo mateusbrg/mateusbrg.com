@@ -23,9 +23,8 @@ const {
   containerSize = 'content',
 } = Astro.props;
 
-const containerClass = containerSize === 'content'
-  ? 'max-w-[56rem]'
-  : 'max-w-[1200px]';
+const containerClass =
+  containerSize === 'content' ? 'max-w-[56rem]' : 'max-w-[1200px]';
 ---
 
 <!doctype html>
@@ -33,7 +32,9 @@ const containerClass = containerSize === 'content'
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <SEO title={title} description={description} image={image} type={type} />
     <ClientRouter />
   </head>
@@ -43,11 +44,7 @@ const containerClass = containerSize === 'content'
       id="main-content"
       transition:name="site-main"
       transition:animate="fade"
-      class:list={[
-        containerClass,
-        'mx-auto px-5 sm:px-7 lg:px-10',
-        mainClass,
-      ]}
+      class:list={[containerClass, 'mx-auto px-5 sm:px-7 lg:px-10', mainClass]}
     >
       <slot />
     </main>

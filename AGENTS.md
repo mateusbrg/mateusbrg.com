@@ -40,7 +40,7 @@ src/
 │   └── Layout.astro    # Base layout (SEO head, Nav, main container, Footer)
 ├── pages/
 │   ├── index.astro     # Homepage: hero + latest posts text list
-│   ├── sobre.astro     # About page (/sobre)
+│   ├── sobre.astro     # About page (/about)
 │   └── blog/
 │       ├── index.astro # Blog list: image cards grid
 │       └── [slug].astro# Dynamic blog post route
@@ -57,16 +57,18 @@ dist/                   # Build output (generated; do not edit)
 Blog posts live in `src/content/blog/` as `.mdx` files. The collection is defined in `src/content.config.ts` (NOT `src/content/config.ts` — this is the Astro 5 location).
 
 **Frontmatter schema:**
+
 ```yaml
-title: string        # Required
-description: string  # Required
-date: Date           # Required (YYYY-MM-DD)
+title: string # Required
+description: string # Required
+date: Date # Required (YYYY-MM-DD)
 image: ImageMetadata # Required (relative path to cover image)
-tags: string[]       # Optional
-draft: boolean       # Optional (default: false)
+tags: string[] # Optional
+draft: boolean # Optional (default: false)
 ```
 
 **Key Astro 5 APIs:**
+
 - `defineCollection` from `astro:content` with `glob()` loader
 - `getCollection('blog')` to query posts
 - `render()` from `astro:content` to get the `<Content />` component
@@ -76,18 +78,18 @@ draft: boolean       # Optional (default: false)
 
 Defined in `src/styles/global.css` under `@theme {}`:
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--color-background` | `#FAFAF8` | Page background |
-| `--color-surface` | `#FFFFFF` | Card/nav backgrounds |
-| `--color-text-primary` | `#1A1A1A` | Headings |
-| `--color-text-body` | `#3D3D3D` | Body text |
-| `--color-text-muted` | `#6B6B6B` | Secondary text, dates |
-| `--color-border` | `#E8E8E4` | Borders, dividers |
-| `--color-accent` | `#2B5EA7` | Links, highlights |
-| `--font-heading` | Space Grotesk | Headings, nav |
-| `--font-body` | Noto Serif | Body text, prose |
-| `--font-mono` | IBM Plex Mono | Code blocks, dates |
+| Token                  | Value         | Usage                 |
+| ---------------------- | ------------- | --------------------- |
+| `--color-background`   | `#FAFAF8`     | Page background       |
+| `--color-surface`      | `#FFFFFF`     | Card/nav backgrounds  |
+| `--color-text-primary` | `#1A1A1A`     | Headings              |
+| `--color-text-body`    | `#3D3D3D`     | Body text             |
+| `--color-text-muted`   | `#6B6B6B`     | Secondary text, dates |
+| `--color-border`       | `#E8E8E4`     | Borders, dividers     |
+| `--color-accent`       | `#2B5EA7`     | Links, highlights     |
+| `--font-heading`       | Space Grotesk | Headings, nav         |
+| `--font-body`          | Noto Serif    | Body text, prose      |
+| `--font-mono`          | IBM Plex Mono | Code blocks, dates    |
 
 ## Build, Test, and Development Commands
 

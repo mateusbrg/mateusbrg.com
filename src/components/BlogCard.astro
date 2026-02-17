@@ -13,21 +13,24 @@ interface Props {
 const { title, description, date, image, slug, variant = 'row' } = Astro.props;
 ---
 
-<article class="py-5 sm:py-6 border-b border-border last:border-b-0">
+<article class="py-5 sm:py-6 border-b border-border last:border-b-0 reveal reveal-delay-1">
   <div class:list={[
     'grid gap-4 sm:gap-7 items-center',
     variant === 'row'
       ? 'grid-cols-1 md:grid-cols-[1.6fr_2fr]'
       : 'grid-cols-[78px_1fr] sm:grid-cols-[96px_1fr]',
   ]}>
-    <a href={`/blog/${slug}`} class="group overflow-hidden rounded-xl border border-border bg-surface">
+    <a
+      href={`/blog/${slug}`}
+      class="group overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,box-shadow] duration-[var(--motion-fast)] ease-[var(--ease-standard)] motion-reduce:transition-none hover:border-border-strong hover:shadow-[var(--shadow-soft)]"
+    >
       <Image
         src={image}
         alt={title}
         width={variant === 'row' ? 720 : 220}
         height={variant === 'row' ? 430 : 220}
         class:list={[
-          'object-cover w-full h-full transition-transform duration-[var(--motion-base)]',
+          'object-cover w-full h-full transition-transform duration-[var(--motion-base)] ease-[var(--ease-emphasis)] motion-reduce:transition-none',
           variant === 'row' ? 'aspect-[16/10]' : 'aspect-square',
           'group-hover:scale-[1.02]',
         ]}
@@ -41,7 +44,7 @@ const { title, description, date, image, slug, variant = 'row' } = Astro.props;
       <a
         href={`/blog/${slug}`}
         class:list={[
-          'font-heading font-semibold text-text-primary hover:text-accent block mt-1.5 no-underline leading-tight',
+          'font-heading font-semibold text-text-primary hover:text-accent block mt-1.5 no-underline leading-tight transition-[color,text-underline-offset] duration-[var(--motion-fast)] ease-[var(--ease-standard)] motion-reduce:transition-none underline decoration-transparent hover:decoration-current underline-offset-2 hover:underline-offset-4',
           variant === 'row' ? 'text-[1.2rem] sm:text-[1.5rem]' : 'text-[1.05rem] sm:text-[1.15rem]',
         ]}
       >

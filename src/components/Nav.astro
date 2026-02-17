@@ -9,30 +9,23 @@ const links = [
 ---
 
 <nav class="sticky top-0 z-50 py-3 sm:py-4">
-  <div class="max-w-[1200px] mx-auto px-5 sm:px-7 lg:px-10">
-    <div class="surface-card mx-auto max-w-max px-2.5 py-2 sm:px-4 sm:py-2.5">
-      <div class="flex items-center gap-2 sm:gap-3">
-        <a
-          href="/"
-          class="font-heading text-sm sm:text-[0.95rem] font-bold text-text-primary px-2 py-1.5"
-          aria-label="Mateus Braga - página inicial"
-        >
-          mateus
-        </a>
-      {links.map((link) => (
-        <a
-          href={link.href}
-          class:list={[
-            'rounded-full px-2.5 py-1.5 text-[0.9rem] sm:text-[0.95rem] transition-colors duration-[var(--motion-fast)] no-underline',
-            link.isActive
-              ? 'bg-accent-soft text-accent font-semibold'
-              : 'text-text-muted hover:text-text-primary',
-          ]}
-          aria-current={link.isActive ? 'page' : undefined}
-        >
-          {link.label}
-        </a>
-      ))}
+  <div class="max-w-[56rem] mx-auto px-5 sm:px-7 lg:px-10">
+    <div class="surface-card mx-auto max-w-max px-2.5 py-2 sm:px-3 sm:py-2.5">
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'rounded-full px-3 py-1.5 text-[0.93rem] sm:text-[0.98rem] transition-[color,background-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] no-underline motion-reduce:transition-none',
+              link.isActive
+                ? 'bg-accent-soft text-accent font-semibold'
+                : 'text-text-muted hover:text-text-primary hover:-translate-y-px',
+            ]}
+            aria-current={link.isActive ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
       </div>
     </div>
   </div>

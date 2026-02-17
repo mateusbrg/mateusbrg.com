@@ -8,14 +8,14 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 ---
 
 <Layout title="Blog" description="Artigos sobre tecnologia, sistemas e desenvolvimento">
-  <section class="section-shell pt-10 sm:pt-14">
-    <div class="section-intro">
+  <section class="section-shell pt-10 sm:pt-14" transition:name="blog-list">
+    <div class="section-intro reveal">
       <p class="eyebrow">Arquivo</p>
-      <h1 class="font-heading text-[var(--size-h1)] font-bold text-text-primary mt-2">Últimos artigos</h1>
-      <p class="text-[var(--size-lead)] text-text-muted mt-3 content-measure">
+      <h1 class="font-heading text-[var(--size-h1)] font-bold text-text-primary mt-2" transition:name="page-title">Últimos artigos</h1>
+      <p class="text-[var(--size-lead)] text-text-muted mt-3 content-measure reveal reveal-delay-1">
         Pensamentos sobre design de sistemas, desenvolvimento e tecnologia aplicada a problemas reais.
       </p>
-      <p class="meta-line mt-4">{posts.length} publicações</p>
+      <p class="meta-line mt-4 reveal reveal-delay-2">{posts.length} publicações</p>
     </div>
     <div class="mt-1">
       {posts.map((post) => (

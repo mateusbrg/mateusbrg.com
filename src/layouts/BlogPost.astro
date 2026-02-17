@@ -28,24 +28,24 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
 ---
 
 <Layout title={title} description={description} containerSize="content" mainClass="pb-8">
-  <article class="section-shell pt-7 sm:pt-10">
-    <p class="eyebrow">Artigo</p>
+  <article class="section-shell pt-7 sm:pt-10" transition:name="post-article">
+    <p class="eyebrow reveal">Artigo</p>
     <Image
       src={image}
       alt={title}
       width={1200}
       height={630}
-      class="w-full aspect-[16/10] object-cover rounded-xl border border-border shadow-[var(--shadow-soft)] mt-4"
+      class="w-full aspect-[16/10] object-cover rounded-xl border border-border shadow-[var(--shadow-soft)] mt-4 reveal reveal-delay-1"
     />
-    <h1 class="font-heading text-[var(--size-h1)] font-bold text-text-primary mt-7 content-measure">
+    <h1 class="font-heading text-[var(--size-h1)] font-bold text-text-primary mt-7 content-measure reveal reveal-delay-2" transition:name="page-title">
       {title}
     </h1>
     {showLead && (
-      <p class="text-text-muted text-[var(--size-lead)] mt-3 content-measure">
+      <p class="text-text-muted text-[var(--size-lead)] mt-3 content-measure reveal reveal-delay-2">
         {description}
       </p>
     )}
-    <div class="meta-line flex flex-wrap items-center gap-2 mt-4">
+    <div class="meta-line flex flex-wrap items-center gap-2 mt-4 reveal reveal-delay-3">
       <time datetime={date.toISOString()}>{formattedDate}</time>
       <span aria-hidden="true">&middot;</span>
       <span>Mateus Braga</span>
@@ -57,7 +57,7 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
       )}
     </div>
     <hr class="border-border my-9" />
-    <div class="prose">
+    <div class="prose reveal reveal-delay-3">
       <slot />
     </div>
   </article>

@@ -10,44 +10,26 @@ interface Props {
   description?: string;
   image?: string;
   type?: string;
-  mainClass?: string;
-  containerSize?: 'content' | 'wide';
 }
-
-const {
-  title,
-  description,
-  image,
-  type,
-  mainClass = '',
-  containerSize = 'content',
-} = Astro.props;
-
-const containerClass =
-  containerSize === 'content' ? 'max-w-[56rem]' : 'max-w-[1200px]';
+const { title, description, image, type } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" transition:animate="none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <SEO title={title} description={description} image={image} type={type} />
-    <ClientRouter />
+    <ClientRouter fallback="swap" />
   </head>
   <body>
-    <Nav />
-    <main
-      id="main-content"
-      transition:name="site-main"
-      transition:animate="fade"
-      class:list={[containerClass, 'mx-auto px-5 sm:px-7 lg:px-10', mainClass]}
-    >
-      <slot />
-    </main>
-    <Footer />
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <div class="site-shell">
+      <Nav />
+      <main id="main-content" tabindex="-1"><slot /></main>
+      <Footer />
+    </div>
+    <script src="../scripts/motion.ts"></script>
   </body>
 </html>

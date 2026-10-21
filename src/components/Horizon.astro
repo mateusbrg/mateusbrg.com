@@ -1,0 +1,69 @@
+<figure class="horizon-study" data-scene="sunset">
+    <svg viewBox="0 0 640 164" class="horizon" role="img" aria-labelledby="horizon-title">
+      <title id="horizon-title">Pôr do sol sobre o mar, com reflexo na água e uma encosta com árvores</title>
+      <defs><pattern id="pencil-hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-22)"><path d="M0 0V7" stroke="currentColor" stroke-width=".7" opacity=".15"/></pattern></defs>
+      <g class="sun-layer" aria-hidden="true">
+        <ellipse cx="424" cy="66" rx="61" ry="35" fill="#ead6b7" opacity=".24"/>
+        <path d="M399 85C389 66 397 45 416 42C438 36 453 53 450 72L447 86" fill="#dfb384" fill-opacity=".55" stroke="#9a7352" stroke-width="1.2"/>
+        <path d="M400 79C392 65 402 44 419 43C439 39 451 55 448 73" fill="none" stroke="#9a7352" stroke-width=".65" opacity=".45"/>
+        <path d="M405 94L440 94M396 103L449 102M409 112L436 112M398 122L449 122M414 133L434 132" fill="none" stroke="#af805a" stroke-width="1.6" stroke-linecap="round" opacity=".6"/>
+      </g>
+      <g class="moon-layer" aria-hidden="true">
+        <circle cx="426" cy="43" r="28" fill="#e7e8db" stroke="#788681" stroke-width="1.2"/>
+        <path d="M426 16C443 15 456 28 454 44C454 61 438 72 424 70" fill="none" stroke="#788681" stroke-width=".6" opacity=".5"/>
+        <g fill="#b6c4bb" opacity=".42"><circle cx="415" cy="33" r="6"/><circle cx="436" cy="50" r="4"/><circle cx="419" cy="55" r="3"/></g>
+        <path d="M406 93L444 93M400 102L451 102M411 113L438 112M402 122L448 122M416 132L437 132" stroke="#718d8a" stroke-width="1.8" stroke-linecap="round" opacity=".65"/>
+        <g stroke="#788681" stroke-width="1" stroke-linecap="round"><path d="M352 33h5m-2.5-2.5v5M509 51h5m-2.5-2.5v5M553 23h4m-2-2v4"/></g>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M34 111C81 109 104 86 138 88C170 87 190 101 224 103C295 86 357 87 611 87" stroke-width="1.25"/>
+        <path d="M225 106C322 91 407 91 608 90" stroke-width=".65" opacity=".42"/>
+        <path d="M37 113C82 108 103 88 138 91C176 93 191 106 225 106L228 150H37Z" fill="url(#pencil-hatch)" stroke="none"/>
+        <path d="M69 109L69 76M56 94L69 75L80 94M58 100L69 84L82 101M96 99L96 59M82 81L96 58L110 83M80 92L96 71L112 92M123 89L123 69M115 80L123 68L132 81" stroke-width="1.15"/>
+        <path d="M274 111q20-3 43 0M498 109q24-4 50-1M330 133q20-3 35-1M555 133q13-3 29 0M244 145q26-5 45-1M465 147q29-5 56-1" stroke-width=".95" opacity=".54"/>
+      </g>
+    </svg>
+    <figcaption><span>Um intervalo para olhar o horizonte.</span><span class="scene-controls" hidden role="group" aria-label="Luz da paisagem"><button type="button" data-scene-choice="sunset" aria-pressed="true">Pôr do sol</button><button type="button" data-scene-choice="moon" aria-pressed="false">Luar</button></span></figcaption>
+  </figure>
+<style>
+.horizon-study { margin: 30px 0 0; color: #6c7669; }
+.horizon { display: block; width: 100%; height: auto; overflow: visible; }
+.horizon-study figcaption { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0; text-align: left; }
+.scene-controls { display: inline-flex; gap: 4px; }
+.scene-controls button { background: transparent; border: 0; position: relative; min-height: 44px; padding: 8px 10px; color: var(--color-text-muted); font: 12px/1.5 system-ui, sans-serif; }
+.scene-controls button[aria-pressed="true"] { color: var(--color-text-primary); }
+.scene-controls button::after { content: ''; position: absolute; left: 10px; right: 10px; bottom: 7px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--motion-fast) var(--ease-out); }
+.scene-controls button[aria-pressed="true"]::after { transform: scaleX(1); }
+.horizon .sun-layer, .horizon .moon-layer { transition: opacity var(--motion-change) var(--ease-out); }
+.horizon .moon-layer { opacity: 0; }
+[data-scene="moon"] .sun-layer { opacity: 0; }
+[data-scene="moon"] .moon-layer { opacity: 1; }
+.scene-controls button { transition: transform var(--motion-fast) var(--ease-out); }
+:global(body[data-input="pointer"]) .scene-controls button:active { transform: scale(.97); }
+
+.horizon-study figcaption { color: var(--color-text-muted); font: 12px/1.7 var(--font-ui); }
+.scene-controls[hidden] { display: none; }
+@media (max-width: 520px) {
+  .horizon-study { margin-top: 24px; }
+  .horizon-study figcaption { font-size: 11px; gap: 3px; }
+}
+</style>
+
+<script>
+  function setupHorizon() {
+    const figure = document.querySelector<HTMLElement>('.horizon-study');
+    if (!figure) return;
+    const controls = figure.querySelector<HTMLElement>('.scene-controls');
+    if (controls) controls.hidden = false;
+    figure.querySelectorAll<HTMLButtonElement>('[data-scene-choice]').forEach(button => {
+      button.addEventListener('click', () => {
+        const scene = button.dataset.sceneChoice;
+        figure.dataset.scene = scene;
+        const title = figure.querySelector('title');
+        if (title) title.textContent = `${scene === 'sunset' ? 'Pôr do sol' : 'Lua cheia'} sobre o mar, com reflexo na água e uma encosta com árvores`;
+        figure.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', setupHorizon);
+</script>

@@ -1,73 +1,35 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
 import BlogCard from '../components/BlogCard.astro';
+import Horizon from '../components/Horizon.astro';
+import SocialLinks from '../components/SocialLinks.astro';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 5);
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Layout
-  title="Mateus Braga"
-  description="Meu cantinho digital para compartilhar reflexões sobre sistemas, computação e tecnologia."
->
-  <section class="section-shell pt-8 sm:pt-12" transition:name="home-hero">
-    <p class="eyebrow reveal">Olá, sou o Mateus!</p>
-    <h1
-      class="page-display text-text-primary mt-3 content-measure reveal reveal-delay-1"
-      transition:name="page-title"
-    >
-      Tudo placeholder por enquanto, aguarde!
-    </h1>
-    <p
-      class="page-lead text-text-muted mt-5 content-measure reveal reveal-delay-2"
-    >
-      placeholder para o conteúdo da home, que ainda está em construção.
-    </p>
-    <div class="mt-8 flex flex-wrap items-center gap-4 reveal reveal-delay-2">
-      <a
-        href="/blog"
-        class="inline-flex items-center justify-center rounded-full bg-text-primary px-5 py-2.5 font-heading text-sm font-semibold text-white no-underline transition-[background-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:bg-accent hover:-translate-y-px motion-reduce:transition-none"
-      >
-        Ler artigos
-      </a>
-      <a
-        href="/about"
-        class="inline-flex items-center justify-center rounded-full border border-border-strong bg-surface px-5 py-2.5 font-heading text-sm font-semibold text-text-primary no-underline transition-[color,border-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:border-accent hover:text-accent hover:-translate-y-px motion-reduce:transition-none"
-      >
-        Sobre mim
-      </a>
-    </div>
-    <div
-      class="mt-10 h-px w-full bg-gradient-to-r from-transparent via-border to-transparent"
-    >
-    </div>
+<Layout title="Mateus Braga" description="Meu espaço para pensar sobre sistemas, computação e as coisas que descubro pelo caminho.">
+  <section class="intro" aria-labelledby="intro-title">
+    <h1 id="intro-title">Olá, eu sou o Mateus.</h1>
+    <p class="lead">Sou engenheiro de software. Este é meu espaço para pensar sobre sistemas, computação e as coisas que descubro pelo caminho.</p>
+    <p>Um lugar para conectar ideias e compartilhar o que vou aprendendo. Sem pressa de ter tudo pronto.</p>
+    <p class="personal-links"><a href="/about">Um pouco sobre mim</a></p>
   </section>
-
-  <section class="section-shell pt-1" transition:name="home-latest">
-    <div class="section-intro reveal">
-      <p class="eyebrow">Últimos textos</p>
-      <div class="flex flex-wrap items-end justify-between gap-4 mt-2">
-        <h2 class="section-title text-text-primary">Últimos artigos</h2>
-        <a href="/blog" class="meta-line no-underline hover:text-accent"
-          >Ver todos os textos</a
-        >
-      </div>
+  <Horizon />
+  <section class="section" aria-labelledby="writing-title">
+    <div class="section-title">
+      <h2 id="writing-title">Escritos</h2>
+      {posts.length > 5 && <a href="/blog">Todos os textos →</a>}
     </div>
-    <div>
-      {
-        posts.map((post) => (
-          <BlogCard
-            title={post.data.title}
-            description={post.data.description}
-            date={post.data.date}
-            image={post.data.image}
-            slug={post.id}
-            variant="compact"
-          />
-        ))
-      }
-    </div>
+    {posts.length > 0 ? (
+      <ul class="post-list">{posts.slice(0, 5).map(post => <BlogCard title={post.data.title} date={post.data.date} slug={post.id} />)}</ul>
+    ) : (
+      <p class="empty-note">As primeiras páginas ainda estão por vir.</p>
+    )}
+  </section>
+  <section class="section" aria-labelledby="social-title">
+    <h2 id="social-title">Me encontre por aí</h2>
+    <SocialLinks />
   </section>
 </Layout>

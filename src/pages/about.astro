@@ -1,39 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SocialLinks from '../components/SocialLinks.astro';
 ---
 
-<Layout title="Sobre" description="Sobre mim" containerSize="content">
-  <section class="section-shell pt-10 sm:pt-14" transition:name="about-content">
-    <p class="eyebrow reveal">Sobre</p>
-    <h1
-      class="page-title text-text-primary mt-2 reveal reveal-delay-1"
-      transition:name="page-title"
-    >
-      Sobre mim
-    </h1>
-
-    <div class="prose mt-8 reveal reveal-delay-2">
-      <p>
-        Olá! Eu sou o Mateus, engenheiro de software apaixonado por sistemas,
-        computação e tecnologia.
-      </p>
-      <p>
-        Este blog ainda está em construção, mas aqui pretendo compartilhar
-        reflexões e aprendizados
-      </p>
-
-      <h2>Contato</h2>
-      <p>Você pode me encontrar nas seguintes plataformas:</p>
-      <ul>
-        <li>
-          <a href="https://github.com/mateusbrg" target="_blank">GitHub</a>
-        </li>
-        <li>
-          <a href="https://linkedin.com/in/mateusbrg" target="_blank"
-            >LinkedIn</a
-          >
-        </li>
-      </ul>
-    </div>
+<Layout title="Sobre — Mateus Braga" description="Um pouco sobre mim, meus interesses e este jardim digital.">
+  <h1>Um pouco sobre mim</h1>
+  <div class="prose">
+    <p>Sou o Mateus, engenheiro de software. Gosto de entender como as coisas funcionam e de conectar o que aprendo sobre sistemas, computação e tecnologia.</p>
+    <p>Este é meu jardim digital: um espaço para escrever, organizar ideias e compartilhar descobertas, no meu tempo.</p>
+    <p>Fora do código, gosto de games, livros e música — principalmente rap e hip-hop. Também gosto de encontrar os amigos, caminhar no parque e nadar no mar.</p>
+    <p>Um pôr do sol, uma noite de lua cheia perto da natureza e o barulho das ondas sempre me fazem parar um pouco.</p>
+  </div>
+  <section class="section" aria-labelledby="contact-title">
+    <h2 id="contact-title">Me encontre por aí</h2>
+    <SocialLinks />
   </section>
 </Layout>

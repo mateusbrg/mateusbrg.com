@@ -1,34 +1,33 @@
 ---
-const pathname = Astro.url.pathname;
-
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 const links = [
-  { label: 'Início', href: '/', isActive: pathname === '/' },
-  { label: 'Blog', href: '/blog', isActive: pathname.startsWith('/blog') },
-  { label: 'Sobre', href: '/about', isActive: pathname.startsWith('/about') },
+  { href: '/', label: 'Início' },
+  { href: '/blog', label: 'Escritos' },
+  { href: '/about', label: 'Sobre' },
 ];
 ---
 
-<nav class="sticky top-0 z-50 py-3 sm:py-4">
-  <div class="max-w-[56rem] mx-auto px-5 sm:px-7 lg:px-10">
-    <div class="surface-card mx-auto max-w-max px-2.5 py-2 sm:px-3 sm:py-2.5">
-      <div class="flex items-center gap-1.5 sm:gap-2">
-        {
-          links.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                'rounded-full px-3 py-1.5 text-[0.93rem] sm:text-[0.98rem] transition-[color,background-color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] no-underline motion-reduce:transition-none',
-                link.isActive
-                  ? 'bg-accent-soft text-accent font-semibold'
-                  : 'text-text-muted hover:text-text-primary hover:-translate-y-px',
-              ]}
-              aria-current={link.isActive ? 'page' : undefined}
-            >
-              {link.label}
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </div>
-</nav>
+<header class="site-header">
+  <a href="/" class="signature">Mateus Braga</a>
+  <nav class="nav" aria-label="Navegação principal">
+    {links.map(({ href, label }) => (
+      <a href={href} aria-current={pathname === href || (href === '/blog' && pathname.startsWith('/blog/')) ? 'page' : undefined}>{label}</a>
+    ))}
+  </nav>
+</header>
+
+<style>
+  .site-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 64px; }
+  .signature { color: var(--color-text-primary); font: 27px/1.75 var(--font-heading); letter-spacing: -.04em; text-decoration: none; white-space: nowrap; }
+  .nav { display: flex; gap: 22px; font: 13px/1.5 var(--font-ui); }
+  .nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 10px 0; color: var(--color-text-muted); text-decoration: none; }
+  .nav a[aria-current="page"] { color: var(--color-text-primary); }
+  .nav a::after { content: ''; position: absolute; inset: auto 0 5px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--motion-fast) var(--ease-out); }
+  .nav a[aria-current="page"]::after { transform: scaleX(1); }
+  @media (hover: hover) and (pointer: fine) { .nav a:hover::after { transform: scaleX(1); } }
+  @media (max-width: 760px) {
+    .site-header { display: block; margin-bottom: 42px; }
+    .signature { font-size: 25px; }
+    .nav { margin-top: 20px; gap: 25px; }
+  }
+</style>

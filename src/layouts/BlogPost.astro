@@ -1,64 +1,35 @@
 ---
-import Layout from './Layout.astro';
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Layout from './Layout.astro';
 
 interface Props {
   title: string;
   description: string;
   date: Date;
-  image: ImageMetadata;
+  image?: ImageMetadata;
   readingTime?: string;
-  showLead?: boolean;
 }
-
-const {
-  title,
-  description,
-  date,
-  image,
-  readingTime = '',
-  showLead = true,
-} = Astro.props;
-
-const formattedDate = date.toLocaleDateString('pt-BR', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const { title, description, date, image, readingTime } = Astro.props;
+const formattedDate = date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 
-<Layout title={title} description={description} containerSize="content" mainClass="pb-8">
-  <article class="section-shell pt-7 sm:pt-10" transition:name="post-article">
-    <p class="eyebrow reveal">Artigo</p>
-    <Image
-      src={image}
-      alt={title}
-      width={1200}
-      height={630}
-      class="w-full aspect-[16/10] object-cover rounded-xl border border-border shadow-[var(--shadow-soft)] mt-4 reveal reveal-delay-1"
-    />
-    <h1 class="page-title text-text-primary mt-7 content-measure reveal reveal-delay-2" transition:name="page-title">
-      {title}
-    </h1>
-    {showLead && (
-      <p class="page-lead text-text-muted mt-3 content-measure reveal reveal-delay-2">
-        {description}
-      </p>
-    )}
-    <div class="meta-line flex flex-wrap items-center gap-2 mt-4 reveal reveal-delay-3">
-      <time datetime={date.toISOString()}>{formattedDate}</time>
-      <span aria-hidden="true">&middot;</span>
-      <span>Mateus Braga</span>
-      {readingTime && (
-        <>
-          <span aria-hidden="true">&middot;</span>
-          <span>{readingTime}</span>
-        </>
-      )}
-    </div>
-    <hr class="border-border my-9" />
-    <div class="prose reveal reveal-delay-3">
-      <slot />
-    </div>
+<Layout title={`${title} — Mateus Braga`} description={description} type="article" image={image ? new URL(image.src, Astro.site).href : undefined}>
+  <article>
+    <a class="back" href="/blog">← Todos os escritos</a>
+    <header class="article-header">
+      <h1>{title}</h1>
+      <p class="summary">{description}</p>
+      <p class="meta"><time datetime={date.toISOString()}>{formattedDate}</time>{readingTime && <> · {readingTime}</>}</p>
+      {image && <Image src={image} alt="" class="cover" widths={[640, 1280]} sizes="(max-width: 760px) calc(100vw - 48px), 656px" />}
+    </header>
+    <div class="prose"><slot /></div>
   </article>
 </Layout>
+
+<style>
+  .back { display: inline-block; font: 13px/1.7 var(--font-ui); margin-bottom: 28px; }
+  .article-header h1 { font-size: clamp(30px, 4.4vw, 44px); max-width: 23ch; overflow-wrap: anywhere; }
+  .summary { font-size: 18px; color: var(--color-text-muted); }
+  .cover { display: block; width: 100%; height: auto; border-radius: 4px; margin-top: 28px; }
+</style>

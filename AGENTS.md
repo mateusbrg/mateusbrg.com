@@ -19,16 +19,16 @@ The site is a static blog with an about page, using an Astro-first architecture:
 - **Shiki** — Built-in syntax highlighting (zero client JS)
 - **sharp** — Image optimization
 - **@astrojs/sitemap** — Auto-generated sitemap
-- **Self-hosted fonts** via `@fontsource`: Space Grotesk (headings), Noto Serif (body), IBM Plex Mono (code)
+- **Fonts**: Georgia (headings, system font); self-hosted Noto Serif (body) and IBM Plex Mono (code) via `@fontsource`
 
 ## Project Structure & Module Organization
 
 ```
 src/
 ├── components/         # Reusable UI pieces (.astro, .vue when needed)
-│   ├── BlogCard.astro  # Image card for blog list page
-│   ├── Footer.astro    # GitHub + LinkedIn links, copyright
-│   ├── Nav.astro       # Sticky top navigation (Home, Blog, Sobre)
+│   ├── BlogCard.astro  # Text row with title and publication date
+│   ├── Footer.astro    # Copyright and closing note
+│   ├── Nav.astro       # Name and navigation (Início, Escritos, Sobre)
 │   └── SEO.astro       # Open Graph, meta description, canonical URL
 ├── content/
 │   └── blog/           # MDX blog posts + cover images
@@ -36,13 +36,13 @@ src/
 │       └── *.mdx       # Blog posts with frontmatter
 ├── content.config.ts   # Astro 5 content collections (glob loader, zod schema)
 ├── layouts/
-│   ├── BlogPost.astro  # Blog post layout (featured image, title, prose article)
+│   ├── BlogPost.astro  # Reading layout with optional cover
 │   └── Layout.astro    # Base layout (SEO head, Nav, main container, Footer)
 ├── pages/
 │   ├── index.astro     # Homepage: hero + latest posts text list
-│   ├── sobre.astro     # About page (/about)
+│   ├── about.astro     # About page (/about)
 │   └── blog/
-│       ├── index.astro # Blog list: image cards grid
+│       ├── index.astro # Blog list: text rows or empty state
 │       └── [slug].astro# Dynamic blog post route
 ├── styles/
 │   └── global.css      # Font imports, TailwindCSS v4 @theme tokens, base/component layers
@@ -62,7 +62,7 @@ Blog posts live in `src/content/blog/` as `.mdx` files. The collection is define
 title: string # Required
 description: string # Required
 date: Date # Required (YYYY-MM-DD)
-image: ImageMetadata # Required (relative path to cover image)
+image: ImageMetadata # Optional (relative path to cover image)
 tags: string[] # Optional
 draft: boolean # Optional (default: false)
 ```
@@ -80,16 +80,18 @@ Defined in `src/styles/global.css` under `@theme {}`:
 
 | Token                  | Value         | Usage                 |
 | ---------------------- | ------------- | --------------------- |
-| `--color-background`   | `#FAFAF8`     | Page background       |
-| `--color-surface`      | `#FFFFFF`     | Card/nav backgrounds  |
-| `--color-text-primary` | `#1A1A1A`     | Headings              |
-| `--color-text-body`    | `#3D3D3D`     | Body text             |
-| `--color-text-muted`   | `#6B6B6B`     | Secondary text, dates |
-| `--color-border`       | `#E8E8E4`     | Borders, dividers     |
-| `--color-accent`       | `#2B5EA7`     | Links, highlights     |
-| `--font-heading`       | Space Grotesk | Headings, nav         |
+| `--color-background`   | `#FCFAF6`     | Page background       |
+| `--color-surface`      | `#FCFAF6`     | Card/nav backgrounds  |
+| `--color-text-primary` | `#343631`     | Headings              |
+| `--color-text-body`    | `#343631`     | Body text             |
+| `--color-text-muted`   | `#676A61`     | Secondary text, dates |
+| `--color-border`       | `#E3E2DA`     | Borders, dividers     |
+| `--color-accent`       | `#556249`     | Links, highlights     |
+| `--font-heading`       | Georgia       | Headings         |
 | `--font-body`          | Noto Serif    | Body text, prose      |
 | `--font-mono`          | IBM Plex Mono | Code blocks, dates    |
+
+The selected design is Essencial + Caderno in marfim leve. The horizon illustration lives in `src/components/Horizon.astro`; social links are shared through `SocialLinks.astro`. UI text uses `--font-ui` (system-ui). Motion respects keyboard navigation and reduced-motion preferences. See `docs/conteudo.md` for publishing and `docs/redesign/` for archived prototypes.
 
 ## Build, Test, and Development Commands
 
@@ -105,7 +107,7 @@ Use `pnpm` (lockfile is `pnpm-lock.yaml`).
 - Follow TypeScript strict mode (`tsconfig.json` extends `astro/tsconfigs/strict`).
 - Use 2-space indentation in `.astro`, `.ts`, and config files.
 - Keep components and layouts in PascalCase (e.g., `BlogCard.astro`, `Layout.astro`).
-- Keep route filenames lowercase and descriptive (`sobre.astro`, `blog/[slug].astro`).
+- Keep route filenames lowercase and descriptive (`about.astro`, `blog/[slug].astro`).
 - Use TailwindCSS v4 utility classes for styling. Custom design tokens go in `@theme {}` in `global.css`.
 - The `.prose` component class in `global.css` handles blog post typography — extend it there, not inline.
 - Prefer scoped styles inside components unless creating shared global styles intentionally.

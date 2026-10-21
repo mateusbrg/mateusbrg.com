@@ -1,0 +1,56 @@
+body[data-design="encontro"] {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --motion-press: 160ms;
+  --motion-change: 200ms;
+}
+.horizon-study { margin: 30px 0 0; color: #6c7669; }
+.horizon { display: block; width: 100%; height: auto; overflow: visible; }
+.horizon-study figcaption { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0; text-align: left; }
+.scene-controls { display: inline-flex; gap: 4px; }
+.scene-controls button { background: transparent; border: 0; position: relative; min-height: 44px; padding: 8px 10px; color: var(--muted); font: 12px/1.5 system-ui, sans-serif; }
+.scene-controls button[aria-pressed="true"] { color: var(--ink); }
+.scene-controls button::after { content: ''; position: absolute; left: 10px; right: 10px; bottom: 7px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--motion-press) var(--ease-out); }
+.scene-controls button[aria-pressed="true"]::after { transform: scaleX(1); }
+.horizon .sun-layer, .horizon .moon-layer { transition: opacity var(--motion-change) var(--ease-out); }
+.horizon .moon-layer { opacity: 0; }
+[data-scene="moon"] .sun-layer { opacity: 0; }
+[data-scene="moon"] .moon-layer { opacity: 1; }
+.scene-controls button, .sketch-node { transition: transform var(--motion-press) var(--ease-out); }
+body[data-input="pointer"] .scene-controls button:active, body[data-input="pointer"] .sketch-node:active { transform: scale(.97); }
+[data-design="encontro"] .external { display: inline-block; transition: transform var(--motion-press) var(--ease-out); }
+[data-design="encontro"] .nav a { position: relative; text-decoration: none; }
+[data-design="encontro"] .nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 5px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--motion-press) var(--ease-out); }
+[data-design="encontro"] .nav a[aria-current="page"]::after { transform: scaleX(1); }
+.sketch-diagram { margin: 36px 0; padding: 22px 0 0; }
+.sketch-steps { display: flex; list-style: none; padding: 0 !important; gap: 38px; margin: 0; }
+.sketch-steps li { flex: 1; min-width: 0; position: relative; margin: 0 !important; }
+.sketch-node { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; position: relative; isolation: isolate; width: 100%; min-height: 98px; border: 0; padding: 16px 8px; background: transparent; font: 15px/1.4 'Noto', Georgia, serif; color: var(--ink); }
+.sketch-node svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; fill: none; stroke: var(--accent); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.sketch-node .sketch-fill { fill: var(--wash); stroke: none; opacity: 0; transition: opacity var(--motion-press) var(--ease-out); }
+.sketch-node[aria-pressed="true"] .sketch-fill { opacity: 1; }
+.second-stroke { opacity: .35; stroke-width: .65; }
+.step-number { font: 11px/1.4 'Mono', monospace; color: var(--muted); }
+.sketch-arrow { position: absolute; width: 30px; height: 28px; right: -34px; top: 35px; fill: none; stroke: var(--accent); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.sketch-diagram figcaption { margin-top: 16px; }
+.step-description { min-height: 6.5em; font: 14px/1.8 system-ui, sans-serif; color: var(--muted); margin: 20px 0 0 !important; padding-left: 14px; border-left: 2px solid var(--line); }
+@media (hover: hover) and (pointer: fine) {
+  [data-design="encontro"][data-input="pointer"] .link-list a:hover .external { transform: translate(2px, -2px); }
+  [data-design="encontro"][data-input="pointer"] .nav a:hover::after { transform: scaleX(1); }
+  [data-input="pointer"] .sketch-node:hover .sketch-fill { opacity: .6; }
+  [data-input="pointer"] .sketch-node[aria-pressed="true"]:hover .sketch-fill { opacity: 1; }
+}
+@media (max-width: 520px) {
+  .horizon-study { margin-top: 24px; }
+  .horizon-study figcaption { font-size: 11px; gap: 3px; }
+  .sketch-steps { flex-direction: column; gap: 24px; align-items: center; }
+  .sketch-steps li { width: min(220px, 100%); }
+  .sketch-node { min-height: 86px; }
+  .sketch-arrow { right: calc(50% - 15px); top: auto; bottom: -26px; transform: rotate(90deg); }
+  .step-description { min-height: 8.5em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scene-controls button, .sketch-node, [data-design="encontro"] .external { transform: none !important; transition: none; }
+  .horizon .sun-layer, .horizon .moon-layer, .sketch-node .sketch-fill { transition: opacity 100ms linear; }
+  .scene-controls button::after, [data-design="encontro"] .nav a::after { transition: none; }
+}
+body[data-input="keyboard"] *, body[data-input="keyboard"] *::after { transition: none !important; }

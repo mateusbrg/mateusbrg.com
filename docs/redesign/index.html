@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Estudos do jardim — Mateus Braga</title>
+  <link rel="stylesheet" href="gallery.css?v=4">
+</head>
+<body>
+  <header class="gallery-header">
+    <div><span class="overline">MATEUSBRG.COM / ESTUDO DE REDESIGN</span><h1>Um lugar para voltar.</h1></div>
+    <p>Essencial na estrutura, Caderno na tipografia.<br>Explore a nova mistura e compare com as originais.</p>
+  </header>
+  <main>
+    <div class="choices" role="group" aria-label="Escolher proposta">
+      <button data-design="encontro" aria-pressed="true"><span class="swatches blend-swatches" aria-hidden="true"></span><strong>Essencial + Caderno</strong><span>Nova exploração. Serifas, uma coluna e cores suaves.</span></button>
+      <button data-design="essencial" aria-pressed="false"><span class="swatches essential-swatches" aria-hidden="true"></span><strong>01 / Essencial</strong><span>A pessoa e as palavras. Simples, direto, acolhedor.</span></button>
+      <button data-design="caderno" aria-pressed="false"><span class="swatches notebook-swatches" aria-hidden="true"></span><strong>02 / Caderno</strong><span>O ritmo de um livro. Papel, serifas e margem para pensar.</span></button>
+      <button data-design="oficina" aria-pressed="false"><span class="swatches workshop-swatches" aria-hidden="true"></span><strong>03 / Oficina</strong><span>Ideias em construção. Um arquivo pessoal para explorar.</span></button>
+    </div>
+    <div id="palettes" class="palettes" role="group" aria-label="Paleta da nova mistura">
+      <span>Tom do papel</span>
+      <button data-palette="marfim" aria-pressed="true"><span class="palette-dot ivory" aria-hidden="true"></span>Marfim leve</button>
+      <button data-palette="papel" aria-pressed="false"><span class="palette-dot paper" aria-hidden="true"></span>Papel neutro</button>
+      <button data-palette="nevoa" aria-pressed="false"><span class="palette-dot mist" aria-hidden="true"></span>Névoa verde</button>
+      <span id="palette-description">Um pouco de calor, com bem menos amarelo.</span>
+    </div>
+    <div class="preview-controls">
+      <label>Página <select id="page"><option value="inicio">Início</option><option value="texto">Leitura de exemplo</option><option value="texto/conexoes">Diagrama de exemplo</option><option value="links">Links guardados</option><option value="sobre">Sobre</option></select></label>
+      <label>Conteúdo <select id="content"><option value="inicio">Sem artigos</option><option value="exemplos">Com exemplos</option></select></label>
+      <button id="mobile" aria-pressed="false">Simular celular</button>
+      <a id="open" href="encontro.html" target="_blank" rel="noopener">Abrir proposta ↗</a>
+    </div>
+    <div class="preview-stage"><iframe id="preview" title="Proposta Essencial + Caderno" src="encontro.html"></iframe></div>
+    <section class="rationale" aria-live="polite"><h2 id="why-title">Essencial + Caderno</h2><p id="why"></p><p id="tradeoff"></p></section>
+    <p class="disclosure">Estudos locais. Textos de demonstração não são artigos publicados. As biografias propostas usam apenas as informações já presentes no site.</p>
+  </main>
+  <script src="gallery.js?v=4"></script>
+</body>
+</html>
